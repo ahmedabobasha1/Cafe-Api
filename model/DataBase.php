@@ -4,7 +4,6 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-echo 'Hello from here';
 class Database
 {
 
@@ -20,13 +19,7 @@ class Database
     $this->isConnected = true;
     try {
       $dsn = "mysql:dbname={$dbname};host={$dbhost};port={$dbport}";
-      $this->connection = new PDO($dsn, $dbuser, $dbpassword, array(
-
-        PDO::MYSQL_ATTR_SSL_CA => true,
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-
-
-      ));
+      $this->connection = new PDO($dsn, $dbuser, $dbpassword);
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -59,7 +52,7 @@ class Database
       $stmt = $this->connection->prepare($quary);
       $stmt->execute($parms);
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      return json_encode($row);
+      return $row;
     } catch (PDOException $e) {
 
       throw new Exception($e->getMessage());
@@ -95,9 +88,5 @@ class Database
     }
   }
 }
-
-$db = new Database();
-
-var_dump($db);
 
 ?>
