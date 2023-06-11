@@ -14,9 +14,9 @@ require('../model/DataBase.php');
 
 $db = new Database();
 
-var_dump($_SERVER["REQUEST_METHOD"]);
+
 
 
 $result =  $db->getrows('orders', 'select * from orders');
 
-echo  json_encode($result);
+echo  json_encode(["data" => $result]);
