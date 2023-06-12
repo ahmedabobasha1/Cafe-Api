@@ -9,7 +9,9 @@ require_once '../vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
-header("Content-Type: application/json");
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
 
 require '../model/DataBase.php';
 
@@ -17,9 +19,15 @@ $db = new Database();
 
 
 // handle login
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_POST["password"])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+
+
+    $data = json_decode(file_get_contents('php://input'));
+
+
+    $email = $data->email;
+    $password = $data->password;
 
 
 
@@ -74,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["email"]) && isset($_P
     $jwt_secret = 'verygoodsecretkey';
 
     $jwt_payload = [
+        'id' => $result['id'],
         'username' => $result['name'],
         'email' => $result['email'],
         'isAdmin' => $result['is_admin']
