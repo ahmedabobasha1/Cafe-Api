@@ -4,6 +4,8 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+
+
 class Database{
 
     public $isConnected;
@@ -12,7 +14,8 @@ class Database{
     public function __construct()
    
     {
-        require('connection_credits.php');
+        require(dirname(__DIR__). '/config/connection_credits.php');
+
         $this->isConnected= true;
         try{
             $dsn = "mysql:dbname={$dbname};host={$dbhost};port={$dbport}";
@@ -46,7 +49,7 @@ class Database{
     }
     }
 
-    public function getrow($tablename,$quary,$parms = [])
+    public function getrow($tablename,$quary,$parms=[])
     
     {
        
