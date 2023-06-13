@@ -1,24 +1,13 @@
 <?php
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
 
-require_once '../vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
+require('../../handle.php');
 
-header('Access-Control-Allow-Origin: *');
-
-header('Access-Control-Allow-Methods:POST');
-
-header("Access-Control-Allow-Headers: X-Requested-With");
-
-header('Content-Type: application/json');
-
-require '../model/DataBase.php';
 
 $db = new Database();
 
@@ -63,9 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // retrieve user from database
 
-    $result = $db->getrow('users', "SELECT * FROM users WHERE email = ?", [$email]);
+    $stmt = $db->getrow('users', "SELECT * FROM users WHERE email = ?", [$email]);
 
-
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$result) {
         http_response_code(401);

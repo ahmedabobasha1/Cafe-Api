@@ -1,14 +1,5 @@
     <?php
-
-    header('Content-Type: application/json');
-    header('Access-Control-Allow-Origin: *');
-
-    header('Access-Control-Allow-Methods: POST');
-
-    header("Access-Control-Allow-Headers: X-Requested-With");
-
-
-    require '../model/DataBase.php';
+    require('../../handle.php');
 
     $db = new Database();
 
@@ -59,7 +50,9 @@
 
 
         // check if username or email already exist
-        $result = $db->getrow('users', "SELECT * FROM users WHERE name = ? OR email = ? ", [$username, $email]);
+        $stmt = $db->getrow('users', "SELECT * FROM users WHERE name = ? OR email = ? ", [$username, $email]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
             http_response_code(400);
