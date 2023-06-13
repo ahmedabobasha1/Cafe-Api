@@ -37,7 +37,8 @@ if($rowNum > 0){
          array_push($product_arr['data'],$product_item);
 
     }
-             echo json_encode(["data" =>$product_arr]);
+            // echo json_encode(["data" =>$product_arr]);
+            echo json_encode($product_arr);
         }else{
              echo json_encode(
         [

@@ -27,8 +27,7 @@ if( $_SERVER["REQUEST_METHOD"]=== 'POST'){
   $p_image = $_FILES['image']['name'];
   $p_image_tmp_name = $_FILES['image']['tmp_name'];
 
-// var_dump($p_image_tmp_name);
-// die;
+
   $p_categories = $_POST['categories']; 
 
   $extention = explode(".",$p_image);
@@ -36,11 +35,9 @@ if( $_SERVER["REQUEST_METHOD"]=== 'POST'){
 
   $image_name = "product_".time().'.'.$extention;
 
-  var_dump($image_name);
-  die;
+
   $p_image_folder = "./uploaded_img/".$image_name;
-  // var_dump($extention);
-  // die;
+ 
   $imgAllowedExtention =["png","jpg","jpeg"];
 
 
@@ -100,7 +97,7 @@ $result = $db->insertRow('products','insert into products (name,price,quantity,d
       $insert_row = $db->getrows('products',"select MAX(product_id) from products");
      
       $product_id = $insert_row->fetch(PDO::FETCH_COLUMN);
-      // var_dump($product_id);
+      
       foreach($p_categories as $category)
         $db->insertRow('category_product',"insert into category_product (product_id,category_id)
          values(?,?)" ,[$product_id,$category]);  
