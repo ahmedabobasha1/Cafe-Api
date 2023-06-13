@@ -4,7 +4,6 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-
 class Database
 {
 
@@ -21,6 +20,7 @@ class Database
     try {
       $dsn = "mysql:dbname={$dbname};host={$dbhost};port={$dbport}";
       $this->connection = new PDO($dsn, $dbuser, $dbpassword);
+      $this->connection = new PDO($dsn, $dbuser, $dbpassword);
       $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -34,11 +34,10 @@ class Database
 
       $stmt = $this->connection->prepare($quary);
       $stmt->execute();
-     // $rows =  $stmt->fetchAll(PDO::FETCH_ASSOC);
-     //   $num = $stmt->rowCount();
-      
-     return $stmt ;
-      
+      // $rows =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+      //   $num = $stmt->rowCount();
+
+      return $stmt;
     } catch (PDOException $e) {
 
       throw new Exception($e->getMessage());
@@ -52,9 +51,8 @@ class Database
     try {
       $stmt = $this->connection->prepare($quary);
       $stmt->execute($parms);
-     
-       return $stmt;
 
+      return $stmt;
     } catch (PDOException $e) {
 
       throw new Exception($e->getMessage());
@@ -65,8 +63,8 @@ class Database
     try {
 
       $stmt = $this->connection->prepare($quary);
-      $stmt->execute($parms); 
-        
+      $stmt->execute($parms);
+
       return true;
     } catch (PDOException $e) {
 
@@ -80,7 +78,7 @@ class Database
     $stmt->execute($parms);
     // var_dump($stmt);
     // die();
-     return $stmt;
+    return $stmt;
   }
 
   public function deleteRow($tablename, $quary, $parms = [])
