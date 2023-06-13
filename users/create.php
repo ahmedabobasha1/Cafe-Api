@@ -26,6 +26,7 @@ $data = json_decode(file_get_contents('php://input'));
 $name = htmlspecialchars(strip_tags($data->name));
 $email = htmlspecialchars(strip_tags($data->email));
 $password = htmlspecialchars(strip_tags($data->password));
+$password = password_hash($password, PASSWORD_BCRYPT);
 $room_number = htmlspecialchars(strip_tags($data->room_number));
 $ext = htmlspecialchars(strip_tags($data->ext));
 $image = htmlspecialchars(strip_tags($data->image));

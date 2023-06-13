@@ -46,12 +46,16 @@ set name = '$name', email = '$email', password = '$password', room_number = '$ro
 where id = $id";
 
 
-echo $db->updateRow('', $query1);
+$db->updateRow('', $query1);
+echo json_encode(["message"=>"user updated successfully or not !!?"]);
+exit();
 
 }
 else
 {
+    http_response_code(404);
     echo "please use id";
+    exit();
 }
 
 
