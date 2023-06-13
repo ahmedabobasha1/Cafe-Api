@@ -1,7 +1,13 @@
     <?php
-    header('Access-Control-Allow-Origin: *');
+
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+
     header('Access-Control-Allow-Methods: POST');
+
+    header("Access-Control-Allow-Headers: X-Requested-With");
+
+
     require '../model/DataBase.php';
 
     $db = new Database();
@@ -19,7 +25,7 @@
 
         // Name validation:
         if (empty($username)) {
-            $errors[] = "user$username is required";
+            $errors[] = "username is required";
         } else if (strlen($username) < 3 || strlen($username) > 50) {
             $errors[] = "Name must be between 2 and 50 characters";
         }

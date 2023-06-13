@@ -9,9 +9,14 @@ require_once '../vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 
+
 header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods:POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
 
 require '../model/DataBase.php';
 
