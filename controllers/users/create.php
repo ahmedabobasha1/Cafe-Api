@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 require('../../handle.php');
 
 header('Access-Control-Allow-Methods: POST');
@@ -14,8 +10,8 @@ $db = new Database();
 
 
 
+if ($_SERVER["REQUEST_METHOD"] === 'POST'){
 
-////////////////////////neeeds validation and password decription!!!!!!!!!!!!!!!!
 $data = json_decode(file_get_contents('php://input'));
 
 // Clean data
@@ -27,11 +23,22 @@ $room_number = htmlspecialchars(strip_tags($data->room_number));
 $ext = htmlspecialchars(strip_tags($data->ext));
 $image = htmlspecialchars(strip_tags($data->image));
 
+$password = password_hash($password, PASSWORD_DEFAULT);
+
 $query = "insert into users
 (name,email, password, room_number, ext, image)       
  values
 (\"$name\", \"$email\", \"$password\", \"$room_number\", $ext, \"$image\");";
 
-var_dump($query);
+if($db->insertRow('', $query)){
+    echo file_get_contents('php://input');
+    echo json_encode("done") ;
+} 
+else{
+   echo json_encode("error");
+} 
 
-var_dump($db->insertRow('', $query));
+}
+else{
+    echo json_encode("wrong http method");
+}
