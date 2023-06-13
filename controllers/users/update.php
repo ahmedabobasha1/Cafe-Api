@@ -1,9 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-
 header('Access-Control-Allow-Methods: PUT');
 require('../../handle.php');
 
@@ -18,6 +13,7 @@ $db = new Database();
 ////////////////////////neeeds validation and password decription!!!!!!!!!!!!!!!!
 //var_dump($_SERVER['REQUEST_METHOD']);
 //var_dump();
+if ($_SERVER["REQUEST_METHOD"] === 'PUT'){
 
 if ($_GET['id']) {
     $id = $_GET['id'];
@@ -31,10 +27,6 @@ if ($_GET['id']) {
     $ext = htmlspecialchars(strip_tags($data->ext));
     $image = htmlspecialchars(strip_tags($data->image));
 
-    // $query = "insert into users
-    // (name,email, password, room_number, ext, image)       
-    //  values
-    // (\"$name\", \"$email\", \"$password\", \"$room_number\", $ext, \"$image\");";
 
     $query1 = "update users
 set name = '$name', email = '$email', password = '$password', room_number = '$room_number', ext = $ext, image = '$image'
@@ -43,5 +35,9 @@ where id = $id";
 
     echo $db->updateRow('', $query1);
 } else {
-    echo "please use id";
+    echo json_encode("please use id");
+}
+}
+else{
+    echo json_encode("wrong http method");
 }
