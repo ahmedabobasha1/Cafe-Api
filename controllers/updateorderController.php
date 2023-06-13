@@ -12,8 +12,7 @@ $uri=parse_url($_SERVER['REQUEST_URI'])['path'];
 if($uri && $_SERVER['REQUEST_METHOD'] == 'PUT'){
 
      $data=json_decode(file_get_contents("php://input"));
-
-  
+     
     $id = $_GET['id']; 
      $date=$data->date;
      $status=$data->status;

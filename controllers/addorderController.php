@@ -12,6 +12,13 @@ if($uri && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $status=$_POST['status'];
     $userId=$_POST['userId'];
 
+    if (empty($status)){
+        $errors[] = "Status is required";
+    } else if ( $status =='done'|'delivered'|'processing') {
+        $errors[] = "Status must be 'done' or 'delivered' or 'processing'";
+    }
+
+
 $addOrder=$database->insertRow('orders',"insert into orders (userId,date,status) values 
 (?,?,?)",[
 $userId,
