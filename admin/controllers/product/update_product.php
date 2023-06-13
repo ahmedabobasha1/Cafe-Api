@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 header('Access-Control-Allow-Origin');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Mehods:POST');
+header('Access-Control-Allow-Mehods:POST,PUT');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 
 require('/var/www/html/cafe_project/model/DataBase.php');

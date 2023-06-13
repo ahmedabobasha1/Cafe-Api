@@ -12,7 +12,6 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods
 
 
 
-//require(dirname(__DIR__) . '/../model/DataBase.php');
 require('/var/www/html/cafe_project/model/DataBase.php');
 
 $db = new Database();
@@ -97,7 +96,7 @@ $result = $db->insertRow('products','insert into products (name,price,quantity,d
       $insert_row = $db->getrows('products',"select MAX(product_id) from products");
      
       $product_id = $insert_row->fetch(PDO::FETCH_COLUMN);
-      
+
       foreach($p_categories as $category)
         $db->insertRow('category_product',"insert into category_product (product_id,category_id)
          values(?,?)" ,[$product_id,$category]);  
@@ -106,7 +105,7 @@ $result = $db->insertRow('products','insert into products (name,price,quantity,d
           'message'=>"created successful"
          ]);
     }
-
+  
 
     
-  ;
+  

@@ -5,13 +5,14 @@
 
 header('Access-Control-Allow-Origin');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Mehods:GET');
 
 
 require( '/var/www/html/cafe_project/model/DataBase.php');
 
 $db = new Database();
-
-$imageDir = "/cafe_project/admin/controllers/product/uploaded_img/";
+if( $_SERVER["REQUEST_METHOD"]=== 'GET'){
+     $imageDir = "/cafe_project/admin/controllers/product/uploaded_img/";
 
 $result= $db->getrows('products',"select * from products");
 $rowNum = $result->rowCount();
@@ -24,7 +25,7 @@ if($rowNum > 0){
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
       
          extract($row);
-        
+      
          $product_item =[
             'p_id'=>$product_id,
             'p_name'=>$name,
@@ -46,3 +47,7 @@ if($rowNum > 0){
         ]
         );
 }
+}
+echo json_encode([
+     'error'=>"wrong http method"
+    ]); 
