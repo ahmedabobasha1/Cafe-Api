@@ -4,10 +4,6 @@
 require('../../handle.php');
 header('Access-Control-Allow-Mehods:POST');
 
-
-
-
-
 $db = new Database();
 
 

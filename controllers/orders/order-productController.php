@@ -20,7 +20,9 @@ if ("$url.'?'.$id" && $_SERVER['REQUEST_METHOD'] == 'GET') {
     JOIN products p ON p.product_id = op.product_id
     WHERE o.userID = ?
     GROUP BY o.date, o.status, p.name, p.price, op.quantity; ", [$id]);
-    echo "$getOrderProduct";
+   $result =  $getOrderProduct->fetchALL(PDO::FETCH_ASSOC);
+   echo json_encode(["data" => $result]);
+   
 } else {
     echo "No user with this id";
 }

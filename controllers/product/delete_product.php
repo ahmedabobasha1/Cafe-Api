@@ -14,7 +14,7 @@ $product_id = $_GET['id'];
 
 $product = $db->getRow('products', 'select * from products where product_id =?', [$product_id]);
 
-$row = $product->fetch(PDO::FETCH_ASSOC);
+$row = $product->fetchALL(PDO::FETCH_ASSOC);
 
 $image_path = $imageDir . $row[0]['image'];
 if (file_exists($image_path)) {
