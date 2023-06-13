@@ -1,5 +1,12 @@
     <?php
+
+    require('../../cors.php');
+
     require('../../handle.php');
+
+
+
+
 
     $db = new Database();
 
@@ -50,7 +57,7 @@
 
 
         // check if username or email already exist
-        $stmt = $db->getrow('users', "SELECT * FROM users WHERE name = ? OR email = ? ", [$username, $email]);
+        $stmt = $db->getrow('users', "SELECT * FROM users WHERE email = ? ", [$email]);
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

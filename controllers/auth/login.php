@@ -7,7 +7,8 @@ require_once '../../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
 require('../../handle.php');
-
+require('../../cors.php');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 
 $db = new Database();
 
@@ -18,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     $data = json_decode(file_get_contents('php://input'));
+
 
 
     $email = $data->email;

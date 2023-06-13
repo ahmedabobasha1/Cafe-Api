@@ -1,9 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-
 header('Access-Control-Allow-Methods: DELETE');
 require('../../handle.php');
 
@@ -18,6 +13,7 @@ $db = new Database();
 ////////////////////////neeeds validation and password decription!!!!!!!!!!!!!!!!
 //var_dump($_SERVER['REQUEST_METHOD']);
 //var_dump();
+if ($_SERVER["REQUEST_METHOD"] === 'delete'){
 
 if ($_GET['id']) {
     $id = $_GET['id'];
@@ -30,8 +26,11 @@ if ($_GET['id']) {
 
     $query1 = "delete from users where id = $id";
 
-    var_dump($query1);
     echo $db->deleteRow('', $query1);
 } else {
-    echo "please use id";
+    echo json_encode("please use id");
+}
+}
+else{
+    echo json_encode("wrong http method");
 }
