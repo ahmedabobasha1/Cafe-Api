@@ -12,20 +12,30 @@ if($uri && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $status=$_POST['status'];
     $userId=$_POST['userId'];
 
-    if (empty($status)){
-        $errors[] = "Status is required";
-    } else if ( $status =='done'|'delivered'|'processing') {
-        $errors[] = "Status must be 'done' or 'delivered' or 'processing'";
-    }
+    if(!((isset($status)) &&! empty($status))){
+        echo json_encode(
+          [
+              'message'=>'status is required'
+          ]
+          );
 
+}else if ( $status !=='done'&& $status !=='delivered'&&$status !=='processing') {
+    echo json_encode(
+        [
+            'message'=>"Status must be done or delivered or processing"
+        ]);
+}
+else{
 
-$addOrder=$database->insertRow('orders',"insert into orders (userId,date,status) values 
-(?,?,?)",[
-$userId,
-$date,
-$status
-]);
-echo "Added order successfully.";
-}else{
+    $addOrder=$database->insertRow('orders',"insert into orders (userId,date,status) values 
+    (?,?,?)",[
+    $userId,
+    $date,
+    $status
+    ]);
+    echo "Added order successfully.";
+}}
+else{
     echo "Error creating ";
 }
+

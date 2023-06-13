@@ -18,6 +18,19 @@ if($uri && $_SERVER['REQUEST_METHOD'] == 'PUT'){
      $status=$data->status;
      $userID=$data->userID;
 
+     if(!((isset($status)) &&! empty($status))){
+        echo json_encode(
+          [
+              'message'=>'status is required'
+          ]
+          );
+
+}else if ( $status !=='done'&& $status !=='delivered'&&$status !=='processing') {
+    echo json_encode(
+        [
+            'message'=>"Status must be done or delivered or processing"
+        ]);
+}else{
     $updateOrder=$database->updateRow('orders',"update orders set userId=?, date=?, status=? where orderID=?",
     [
     $userID,
@@ -25,8 +38,9 @@ if($uri && $_SERVER['REQUEST_METHOD'] == 'PUT'){
     $status,
     $id]);
     $query ="update orders set userId=$userID, date=$date, status=$status where orderID=$id";
-// var_dump($query);
    echo json_encode(["message" => "User Updated Successfully "]);
-    }else{
+    }
+}
+   else{
         echo "Error in update function ";
     }
