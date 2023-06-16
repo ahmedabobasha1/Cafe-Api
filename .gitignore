@@ -1,3 +1,5 @@
 /vendor
 admin/controllers/product/uploaded_img/
 /controllers/users/images/
+model/
+/handle.php
