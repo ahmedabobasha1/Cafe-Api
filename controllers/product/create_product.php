@@ -79,6 +79,7 @@ $result = $db->insertRow('products', 'insert into products (name,price,quantity,
 
 if ($result) {
 
+
   move_uploaded_file($p_image_tmp_name, $p_image_folder);
 
   $insert_row = $db->getrows('products', "select MAX(product_id) from products");

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $rowNum =  $result->rowCount();
     $result =  $result->fetchALL(PDO::FETCH_ASSOC);
-   
+
     if ($rowNum > 0) {
 
         $order_arr = [
@@ -43,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         )->fetchALL(PDO::FETCH_ASSOC)[0];
 
         $order_arr['price'] = 0;
-        $order_arr['products']=[];
+        $order_arr['products'] = [];
 
         foreach ($result as $re) {
-           // totall price 
+            // totall price 
             $order_arr['price'] += $re['price'] * $re['quantity'];
             // get products data  
             $product = $database->getrow(
@@ -59,17 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $product['price'] = $re['price'];
             $product['quantity'] = $re['quantity'];
-            $product['image'] = isset($_SERVER['HTTPS']) ? 'https' : 'http' . '://' . $_SERVER['HTTP_HOST'] . $imageDir .$product['image'];
+            $product['image'] = isset($_SERVER['HTTPS']) ? 'https' : 'http' . '://' . $_SERVER['HTTP_HOST'] . $imageDir . $product['image'];
 
             $order_arr['products'][] = $product;
         }
 
         echo json_encode($order_arr);
+    } else {
+        echo json_encode(["message" => "invaild id"]);
     }
- else {
-        echo json_encode(["message"=>"invaild id"]);
-}
-}
-else {
-    echo json_encode(["message"=>"Invalid Method"]);
+} else {
+    echo json_encode(["message" => "Invalid Method"]);
 }

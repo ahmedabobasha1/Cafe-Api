@@ -1,7 +1,7 @@
 <?php
 
-$dbuser = 'abobasha';
-$dbpassword = 'Apple4321@2020';
-$dbname = 'cafe';
+$dbuser = 'root';
+$dbpassword = 'Huntmybutt12@';
+$dbname = 'php_project';
 $dbhost = 'localhost';
 $dbport = 3306;

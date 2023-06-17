@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Methods: DELETE');
 require('../../handle.php');
 
 

@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // verify password
-    if (!password_verify($password, $result["password"])) {
+    if ($password !== $result["password"]) {
         http_response_code(401);
         echo json_encode(["error" => "Invalid password"]);
         exit();

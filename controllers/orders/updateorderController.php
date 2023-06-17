@@ -11,9 +11,9 @@ if ($uri && $_SERVER['REQUEST_METHOD'] == 'PUT') {
 
     $data = json_decode(file_get_contents("php://input"));
 
-     $order_id = $_GET['id'];
+    $order_id = $_GET['id'];
 
-     $status = $data->status;
+    $status = $data->status;
 
     if (!((isset($status)) && !empty($status))) {
         echo json_encode(
@@ -27,20 +27,18 @@ if ($uri && $_SERVER['REQUEST_METHOD'] == 'PUT') {
                 'message' => "Status must be done or delivered or processing"
             ]
         );
-    }
-     else {
+    } else {
         $updateOrder = $database->updateRow(
             'orders',
             "update orders set  status=? where orderID=?",
             [
-                
+
                 $status,
                 $order_id
             ]
         );
         echo json_encode(["message" => "order Updated Successfully "]);
     }
-}
- else {
+} else {
     echo json_encode(["message" => "Error in update "]);
- }
+}

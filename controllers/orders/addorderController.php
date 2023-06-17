@@ -39,7 +39,7 @@ if ($uri && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 $value['id'],
             ]
         )->fetchALL(PDO::FETCH_ASSOC)[0];
-                // insert in order_product table  
+        // insert in order_product table  
         $database->insertRow('order_product', "insert into order_product (order_id,product_id,price,quantity) values 
     (?,?,?,?)", [
             $order_id,
@@ -53,11 +53,9 @@ if ($uri && $_SERVER['REQUEST_METHOD'] == 'POST') {
             'products',
             'update products set quantity = ?-? where product_id =?',
             [$product['quantity'], $value['quantity'], $value['id']]
-        );    
+        );
     }
-    echo json_encode(['message'=>"Added order successfully"]) ;
-}
-else {
-    echo json_encode(['message'=>"Error creating"]);
-    
+    echo json_encode(['message' => "Added order successfully"]);
+} else {
+    echo json_encode(['message' => "Error creating"]);
 }
