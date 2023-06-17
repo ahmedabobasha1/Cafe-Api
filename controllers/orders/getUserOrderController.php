@@ -7,12 +7,12 @@ require('../../handle.php');
 $database = new Database();
 
 $imageDir = "/cafe_project/controllers/product/uploaded_img/";
-
+$user_id = $_GET["id"];
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 if ($uri && $_SERVER['REQUEST_METHOD'] == 'GET') {
     // get all order 
-    $stmts = $database->getrows('', "select * FROM orders")->fetchAll(PDO::FETCH_ASSOC);
+    $stmts = $database->getrow('', "select * FROM orders where userID=?",[$user_id])->fetchAll(PDO::FETCH_ASSOC);
  
     $orders = [];
 

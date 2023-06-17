@@ -5,6 +5,7 @@ require('../../handle.php');
 
 $database = new Database();
 
+$imageDir = "/cafe_project/controllers/product/uploaded_img/";
 
 $order_id = $_GET["id"];
 
@@ -58,6 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $product['price'] = $re['price'];
             $product['quantity'] = $re['quantity'];
+            $product['image'] = isset($_SERVER['HTTPS']) ? 'https' : 'http' . '://' . $_SERVER['HTTP_HOST'] . $imageDir .$product['image'];
+
             $order_arr['products'][] = $product;
         }
 
