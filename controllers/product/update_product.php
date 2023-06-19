@@ -27,7 +27,6 @@ quantity =?
 where product_id = ?
 ', [$_POST['name'], $_POST['price'], $image_name, $_POST['description'], $_POST['quantity'], $_POST['product_id']]);
 
-// $rows_affected = $update_row->rowCount();
 
 move_uploaded_file($_FILES['image']['tmp_name'], $p_image_folder);
 

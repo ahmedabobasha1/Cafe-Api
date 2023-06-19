@@ -4,7 +4,7 @@
 require('../../handle.php');
 
 
-$imageDir = "/cafe_project/admin/controllers/product/uploaded_img/";
+$imageDir = "/cafe_project/controllers/product/uploaded_img/";
 
 $db = new Database();
 if($_SERVER["REQUEST_METHOD"]=== 'GET'){
